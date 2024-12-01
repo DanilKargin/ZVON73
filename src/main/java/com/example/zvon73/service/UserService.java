@@ -1,5 +1,6 @@
 package com.example.zvon73.service;
 
+import com.example.zvon73.Role;
 import com.example.zvon73.entity.User;
 import com.example.zvon73.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +29,9 @@ public class UserService {
         }
         return save(user);
     }
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 
     public User getByUsername(String username) {
         return userRepository.findByEmail(username)
@@ -38,5 +45,28 @@ public class UserService {
     public User getCurrentUser() {
         var username = SecurityContextHolder.getContext().getAuthentication().getName();
         return getByUsername(username);
+    }
+    public void deleteUser(User user){
+        userRepository.delete(user);
+    }
+    public Optional<User> verifyEmail(String token) {
+        Optional<User> userOpt = userRepository.findByVerificationToken(token);
+
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+
+            // Проверка на истечение токена
+            if (user.getTokenExpiryDate() != null && user.getTokenExpiryDate().isBefore(LocalDateTime.now())) {
+                throw new RuntimeException("Токен истёк. Пожалуйста, запросите новый.");
+            }
+
+            user.setRole(Role.USER);
+            user.setVerificationToken(null);
+            user.setTokenExpiryDate(null);
+
+            userRepository.save(user);
+            return Optional.of(user);
+        }
+        return Optional.empty();
     }
 }
