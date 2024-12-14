@@ -1,6 +1,6 @@
 package com.example.zvon73.service.authentication;
 
-import com.example.zvon73.Role;
+import com.example.zvon73.entity.enums.Role;
 import com.example.zvon73.controller.domain.SignInRequest;
 import com.example.zvon73.controller.domain.SignUpRequest;
 import com.example.zvon73.controller.domain.TokenResponse;
@@ -9,7 +9,6 @@ import com.example.zvon73.service.UserService;
 import com.example.zvon73.service.email.EmailService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service

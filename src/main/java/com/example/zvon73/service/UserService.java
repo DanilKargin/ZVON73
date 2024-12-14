@@ -1,6 +1,6 @@
 package com.example.zvon73.service;
 
-import com.example.zvon73.Role;
+import com.example.zvon73.entity.enums.Role;
 import com.example.zvon73.entity.User;
 import com.example.zvon73.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

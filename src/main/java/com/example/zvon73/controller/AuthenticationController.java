@@ -1,17 +1,14 @@
 package com.example.zvon73.controller;
 
-import com.example.zvon73.Role;
+import com.example.zvon73.entity.enums.Role;
 import com.example.zvon73.controller.domain.SignInRequest;
 import com.example.zvon73.controller.domain.SignUpRequest;
 import com.example.zvon73.controller.domain.TokenResponse;
 import com.example.zvon73.entity.User;
 import com.example.zvon73.service.UserService;
 import com.example.zvon73.service.authentication.AuthenticationService;
-import com.example.zvon73.service.email.EmailService;
-import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;

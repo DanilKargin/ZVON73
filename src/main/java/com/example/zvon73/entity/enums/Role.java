@@ -1,4 +1,4 @@
-package com.example.zvon73;
+package com.example.zvon73.entity.enums;
 
 public enum Role {
     UNKNOWN,
