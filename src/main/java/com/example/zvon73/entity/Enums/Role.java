@@ -7,5 +7,4 @@ public enum Role {
     MODERATOR,
     ADMIN,
     NOT_CONFIRMED
-
 }
