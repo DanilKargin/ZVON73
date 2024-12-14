@@ -1,6 +1,6 @@
 package com.example.zvon73.entity;
 
-import com.example.zvon73.entity.enums.Role;
+import com.example.zvon73.entity.Enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -27,22 +26,17 @@ public class User implements UserDetails {
     private UUID id;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "role", nullable = false)
     private Role role;
 
-    @Column(unique = true, nullable = false)
+    @Column(name = "email",unique = true, nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(unique = true)
+    @Column(name = "phone", unique = true)
     private String phone;
-
-    @Column(unique = true)
-    private String verificationToken;
-
-    private LocalDateTime tokenExpiryDate;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
